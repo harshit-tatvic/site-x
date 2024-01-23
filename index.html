@@ -1,0 +1,123 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Site X</title>
+</head>
+<style>
+  :root {
+    --color-bg: #69f7be;
+    --color-text-main: #000000;
+    --color-primary: #ffff00;
+    --wrapper-height: 87vh;
+    --image-max-width: 300px;
+    --image-margin: 3rem;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Verdana;
+    line-height: 1.5rem;
+  }
+
+  iframe {
+    min-height: max(40vh, 250px);
+    min-width: 50vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+  }
+
+  code {
+    font-family: Courier;
+  }
+
+  .wrapper {
+    min-height: var(--wrapper-height);
+    display: grid;
+    place-items: center;
+    margin: 0 1rem;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .instructions {
+    padding-top: 2em;
+    text-align: left;
+  }
+</style>
+
+<body>
+  <div class="wrapper">
+    <div class="content">
+      <h1>Site X</h1>
+
+      <iframe src="site-y-embed.html"></iframe>
+      <div class="instructions">
+        <p>
+          Site X embeds an iframe from Site Y which uses JavaScript to set two cookies: a partitioned and unpartitioned
+          cookie.
+        </p>
+
+        <p>
+          If third-party cookies are blocked you will only see one cookie in the Site Y iframe:
+        </p>
+        <ul>
+          <li><code>__Host-partitioned-cookie=123</code></li>
+        </ul>
+
+        <p>
+          If third-party cookies are allowed you will see two cookies in the Site Y iframe:
+        </p>
+        <ul>
+          <li><code>unpartitioned-cookie=456;</code></li>
+          <li><code>__Host-partitioned-cookie=123</code></li>
+        </ul>
+
+        <h3>Test the behavior with third-party cookies blocked</h3>
+        <ol>
+          <li>Use Chrome 118 or higher.</li>
+          <li>Set the <code>chrome://flags/#test-third-party-cookie-phaseout</code> flag and restart Chrome.</li>
+          <li>When you load this page, you should only see one cookie in the Site Y iframe.
+            <ul>
+              <li>
+                <code>__Host-partitioned-cookie=123</code>
+              </li>
+            </ul>
+          </li>
+          <li>Click <strong>Go to Site Y</strong></li>
+          <li>
+            When you are on Site Y the unparitioned cookie is not in third-party context so it's not blocked and you
+            will see two cookies:
+            <ul>
+              <li><code>unpartitioned-cookie=456;</code></li>
+              <li><code>__Host-partitioned-cookie=123</code>.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3>Clear cookies</h3>
+        To reset the demo, clear all cookies for the site:
+        <ol>
+          <li>In <strong>Application > Storage > Cookies ></strong></li>
+          <li>Right click on <code>https://example.com</code></li>
+          <li>Click <strong>Clear</strong></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
