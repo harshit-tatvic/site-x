@@ -66,6 +66,8 @@
 
       <iframe src="https://tagmate-analytics.github.io/site-y/embed"></iframe>
       <div class="instructions">
+        <p id="cookie_id"></p>
+
         <p>
           Site X embeds an iframe from Site Y which uses JavaScript to set two cookies: a partitioned and unpartitioned
           cookie.
@@ -118,6 +120,15 @@
       </div>
     </div>
   </div>
+
+  <script>
+    window.addEventListener('message', (ev) => {
+      if (ev.origin === "https://tagmate-analytics.github.io") {
+        document.getElementById("cookie_id").innerText
+          = `Cookies passed from iframe: ${ev.data?.__cookie}`;
+      }
+    });
+  </script>
 </body>
 
 </html>
